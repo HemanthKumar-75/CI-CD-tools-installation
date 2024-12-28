@@ -1,7 +1,9 @@
 #!/bin/bash
 
 #resize disk from 20GB to 50GB
-growpart /dev/nvme0n1 4
+name=$(lsblk -dn -o NAME | head -n 1)
+growpart /dev/$name 4
+# growpart /dev/nvme0n1 4
 
 lvextend -L +10G /dev/mapper/RootVG-homeVol
 lvextend -L +10G /dev/mapper/RootVG-varVol

@@ -1,17 +1,14 @@
 module "jenkins" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-
   name = "jenkins"
-
   instance_type          = "t3.small"
-  vpc_security_group_ids = ["sg-0fea5e49e962e81c9"] #replace your SG
-  subnet_id = "subnet-0ea509ad4cba242d7" #replace your Subnet
+  vpc_security_group_ids = ["sg-0fea5e49e962e81c9"]
+  subnet_id = "subnet-0ea509ad4cba242d7"
   ami = data.aws_ami.ami_info.id
   user_data = file("jenkins.sh")
   tags = {
     Name = "jenkins"
   }
-
   # Define the root volume size and type
   root_block_device = [
     {
