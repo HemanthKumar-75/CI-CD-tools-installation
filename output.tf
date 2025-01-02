@@ -10,5 +10,5 @@ output "jenkins_agent" {
 
 output "jenkins-url" {
   description = "URL to access Jenkins"
-  value       = "http://${module.jenkins.public_ip}:8080"
+  value       = "http://jenkins.hemanthkumar.online:8080"
 }
