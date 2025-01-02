@@ -1,18 +1,24 @@
 #!/bin/bash
 
 #resize disk from 20GB to 50GB
+lsblk
+df -hT
 name=$(lsblk -dn -o NAME | head -n 1)
 growpart /dev/$name 4
 # growpart /dev/nvme0n1 4
+df -hT
 
+# resize logical volumes
 lvextend -L +10G /dev/mapper/RootVG-homeVol
 lvextend -L +10G /dev/mapper/RootVG-varVol
 lvextend -l +100%FREE /dev/mapper/RootVG-varTmpVol
 
+# resize filesystems
 xfs_growfs /home
 xfs_growfs /var/tmp
 xfs_growfs /var
 
+# install tools
 yum install java-17-openjdk -y
 yum install -y yum-utils
 yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
