@@ -7,10 +7,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "hemanthkumar.online"
+    bucket = "hemanthkumar"
     key    = "ci-cd-tools"
     region = "us-east-1"
-    dynamodb_table = "hemanthkumar.online_locking"
+    dynamodb_table = "hemanthkumar.online"
   }
 }
 
